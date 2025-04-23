@@ -2,6 +2,16 @@ import re
 from pytube import YouTube
 from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound
 from googletrans import Translator
+from yt_dlp import YoutubeDL
+
+def get_video_title_fallback(video_url):
+    try:
+        with YoutubeDL({'quiet': True}) as ydl:
+            info = ydl.extract_info(video_url, download=False)
+            return info.get('title', None)
+    except Exception as e:
+        print(f"Erro com yt_dlp ao obter o título: {e}")
+        return None
 
 def clean_youtube_url(url):
     match = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11})", url)
@@ -11,7 +21,6 @@ def clean_youtube_url(url):
     return url
 
 def extract_video_id(url):
-    """Extrai o ID do vídeo de qualquer tipo de URL do YouTube."""
     match = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11})", url)
     if match:
         return match.group(1)
@@ -19,7 +28,6 @@ def extract_video_id(url):
     return None
 
 def get_video_title(video_url):
-    """Extrai o título de um vídeo do YouTube."""
     try:
         video_id = extract_video_id(video_url)
         if not video_id:
@@ -33,23 +41,20 @@ def get_video_title(video_url):
         return None
 
 def get_transcript(video_id):
-    """Obtém a transcrição do vídeo em inglês e português."""
     try:
         transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
-        
+
         english_text = None
         portuguese_text = None
+        translated_title = None
 
-        # Tenta inglês
         try:
             english_transcript = transcript_list.find_transcript(['en'])
             english_fetched = english_transcript.fetch()
             english_text = " ".join([entry.text for entry in english_fetched])
-
         except NoTranscriptFound:
             english_text = None
-        
-        # Tenta português
+
         try:
             portuguese_transcript = transcript_list.find_transcript(['pt', 'pt-BR'])
             portuguese_fetched = portuguese_transcript.fetch()
@@ -57,7 +62,6 @@ def get_transcript(video_id):
         except NoTranscriptFound:
             portuguese_text = None
 
-        # Traduz se necessário
         if english_text and not portuguese_text:
             try:
                 translator = Translator()
@@ -69,9 +73,19 @@ def get_transcript(video_id):
         if not english_text and not portuguese_text:
             raise Exception("Nenhuma transcrição encontrada em inglês ou português.")
 
+        # Traduzir título junto com a transcrição, se necessário
+        if english_text and not portuguese_text:
+            try:
+                translator = Translator()
+                translated_title_obj = translator.translate(get_video_title(f"https://www.youtube.com/watch?v={video_id}"), src='en', dest='pt')
+                translated_title = translated_title_obj.text
+            except Exception as e:
+                print(f"Erro ao traduzir o título: {e}")
+
         return {
             'english': english_text,
-            'portuguese': portuguese_text
+            'portuguese': portuguese_text,
+            'translated_title': translated_title
         }
 
     except TranscriptsDisabled:
@@ -80,31 +94,3 @@ def get_transcript(video_id):
         raise Exception("❌ Nenhuma transcrição foi encontrada.")
     except Exception as e:
         raise Exception(f"🚨 Erro ao obter transcrição: {e}")
-
-
-        try:
-            portuguese_transcript = transcript_list.find_transcript(['pt', 'pt-BR'])
-            portuguese_fetched = portuguese_transcript.fetch()
-            portuguese_text = " ".join([entry['text'] for entry in portuguese_fetched])
-        except NoTranscriptFound:
-            print("Transcrição em português não encontrada")
-        
-        # Se não encontrou em português mas encontrou em inglês, traduz
-        if english_text and not portuguese_text:
-            try:
-                translator = Translator()
-                portuguese_text = translator.translate(english_text, src='en', dest='pt').text
-            except Exception as e:
-                print(f"Erro ao traduzir transcrição: {e}")
-        
-        return {
-            'english': english_text,
-            'portuguese': portuguese_text
-        }
-
-    except (TranscriptsDisabled, NoTranscriptFound):
-        print("Transcrição indisponível ou desativada para esse vídeo.")
-        return None
-    except Exception as e:
-        print(f"Erro ao obter transcrição: {e}")
-        return None

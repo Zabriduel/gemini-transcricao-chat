@@ -76,6 +76,11 @@ button[kind="primary"]:hover,
     transform: translateY(-2px);
 }
 
+/* Centralizar o título e subtítulo */
+.header-title {
+    text-align: center;
+}
+
 /* Área de transcrição e resumo */
 .transcript-box, .summary-box {
     background-color: #1e2d40;
