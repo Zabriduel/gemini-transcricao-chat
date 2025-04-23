@@ -1,0 +1,9 @@
+streamlit
+google-generativeai
+youtube-transcript-api
+yt_dlp
+python-dotenv
+pytube
+toml
+fpdf
+googletrans==4.0.0-rc1

@@ -1,0 +1,95 @@
+/* Paleta inspirada em Tomioka Giyu */
+body {
+    background-color: #0f1c2e;
+    color: #e0f7ff;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* Cabeçalho */
+.header {
+    background: linear-gradient(90deg, #1e3a5f, #396e8c);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.header-title h1 {
+    color: #7dcfff;
+    font-size: 2.2rem;
+    margin-bottom: 0;
+}
+
+.header-title h3 {
+    color: #c3e88d;
+    font-weight: normal;
+    font-size: 1.1rem;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #1b2a41;
+    color: #e0f7ff;
+    padding: 20px;
+}
+
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3,
+section[data-testid="stSidebar"] h4 {
+    color: #7dcfff;
+}
+
+section[data-testid="stSidebar"] .stButton>button {
+    background-color: #396e8c;
+    color: white;
+    border: none;
+    transition: background-color 0.3s ease;
+}
+
+section[data-testid="stSidebar"] .stButton>button:hover {
+    background-color: #4f88a7;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    color: #7dcfff;
+}
+
+h4 {
+    color: #c3e88d;
+}
+
+/* Botões */
+button[kind="primary"],
+.stDownloadButton > button {
+    background-color: #396e8c;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[kind="primary"]:hover,
+.stDownloadButton > button:hover {
+    background-color: #4f88a7;
+    transform: translateY(-2px);
+}
+
+/* Área de transcrição e resumo */
+.transcript-box, .summary-box {
+    background-color: #1e2d40;
+    border-left: 5px solid #7dcfff;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Textos dentro das caixas */
+.transcript-box p, .summary-box p {
+    margin: 0;
+    line-height: 1.6;
+    color: #e0f7ff;
+    font-size: 1rem;
+}
