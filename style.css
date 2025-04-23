@@ -5,14 +5,28 @@ body {
     font-family: 'Segoe UI', sans-serif;
 }
 
-/* Cabeçalho */
-.header {
-    background: linear-gradient(90deg, #1e3a5f, #396e8c);
-    padding: 20px;
-    border-radius: 10px;
-    margin-bottom: 30px;
+/* Centraliza o conteúdo principal - sem text-align para não afetar o texto */
+div.block-container {
+    margin: auto;
+    padding: 3rem 2rem 2rem 2rem; /* aumentamos o padding-top */
+    max-width: 1000px;
 }
 
+/* Header */
+.header {
+    background: linear-gradient(to right, #274060, #1B2845);
+    border-radius: 15px;
+    padding: 1.5rem;
+    color: white;
+    margin-bottom: 2rem;
+}
+
+/* Centraliza apenas o conteúdo textual do header */
+.header-title {
+    text-align: center;
+}
+
+/* Outros estilos do header */
 .header-title h1 {
     color: #7dcfff;
     font-size: 2.2rem;
@@ -24,6 +38,7 @@ body {
     font-weight: normal;
     font-size: 1.1rem;
 }
+
 
 /* Sidebar */
 section[data-testid="stSidebar"] {
@@ -76,6 +91,16 @@ button[kind="primary"]:hover,
     transform: translateY(-2px);
 }
 
+/* Botões genéricos - animação hover */
+button {
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+}
+
 /* Centralizar o título e subtítulo */
 .header-title {
     text-align: center;
@@ -89,12 +114,20 @@ button[kind="primary"]:hover,
     border-radius: 10px;
     margin: 20px 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    color: #e0f7ff;
+    max-height: 300px; /* novo */
+    overflow-y: auto;  /* novo */
 }
 
 /* Textos dentro das caixas */
 .transcript-box p, .summary-box p {
     margin: 0;
-    line-height: 1.6;
-    color: #e0f7ff;
-    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
 }
+ 
+
+
+
+
