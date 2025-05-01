@@ -1,43 +1,35 @@
 # 🌊 Hashira da Transcrição
 
- "Com a serenidade de Tomioka, transcreva vídeos do YouTube com precisão e elegância."
+*"Com a serenidade de Tomioka, transcreva vídeos do YouTube com precisão e elegância."*
+
+<p align="center">
+  <img src="tomioka.jpg" alt="Tomioka Banner" width="40%" />
+</p>
+
 ## 🧘‍♂️ Sobre o Projeto
 
-**Hashira da Transcrição** é um sistema desenvolvido com [Streamlit](https://streamlit.io/) que utiliza o poder da IA Gemini, da Google, para realizar transcrições e resumos de vídeos do YouTube em **português** ou **inglês**.
+**Hashira da Transcrição** é uma aplicação web desenvolvida com [Streamlit](https://streamlit.io/) que usa a inteligência artificial da **API Gemini (Google)** para transcrever e gerar resumos de vídeos do YouTube, nos idiomas **português** 🇧🇷 e **inglês** 🇺🇸.
 
-Inspirado no estilo calmo e refinado de **Tomioka Giyu** — o Hashira da Água de *Demon Slayer* —, o app oferece uma interface visual estilizada com sua paleta de cores, entregando uma experiência fluida, elegante e eficaz.
+Inspirado no estilo calmo e refinado de **Tomioka Giyu**, o Hashira da Água de *Demon Slayer*, o app oferece uma interface fluida e estilizada com base em sua paleta de cores.
 
 ---
 
 ## ✨ Funcionalidades
 
-- 🔗 Transcrição automática de vídeos do YouTube.
-- 🧠 Geração de resumos com IA (via API Gemini).
-- 🌐 Suporte a idiomas: **Português** 🇧🇷 e **Inglês** 🇺🇸.
-- 📁 Exportação do resumo em **.txt** ou **.pdf**.
-- 🎨 Interface estilizada com cores e elementos visuais inspirados em Tomioka.
+- 🔗 **Transcrição automática** de vídeos do YouTube.
+- 🧠 **Geração de resumo com IA** (via API Gemini).
+- 🌐 **Suporte a idiomas**: Português e Inglês.
+- 📄 **Exportação** do resumo em **.txt** e **.pdf**.
+- 🎨 **Interface personalizada** inspirada em Tomioka (inclui CSS customizado).
 
 ---
 
 ## ⚙️ Como Usar
 
-### Pré-requisitos
+### ✅ Pré-requisitos
 
-- Python 3.9+
-- API do Gemini configurada
-- Chaves de API necessárias
-### Instalação
-
-```bash
-git clone https://github.com/seu-usuario/hashira-transcricao.git
-cd hashira-transcricao
-pip install -r requirements.txt
-```
-
-### Executar o App
-
-```bash
-streamlit run Main.py
-```
-
----
+- Python 3.9 ou superior
+- Conta com acesso à [API Gemini](https://ai.google.dev/)
+- Chave da API armazenada em um arquivo `.env`:
+  ```env
+  GEMINI_API_KEY=sua-chave-aqui
